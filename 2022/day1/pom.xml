@@ -53,7 +53,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>template.App</mainClass>
+              <mainClass>calorie_counting.App</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
