@@ -6,32 +6,30 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class ShapeTest {
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @ParameterizedTest
   @CsvSource({
       "A, ROCK", "X, ROCK",
       "B, PAPER", "Y, PAPER",
       "C, SCISSORS", "Z, SCISSORS"
   })
-  public void test(String searchedSymbol, Shape exptectedShape) {
+  public void usingKnownSymbolsReturnsMatchingShapes(String searchedSymbol, Shape expectedShape) {
     // GIVEN args
     // WHEN
     Shape foundShape = Shape.fromSymbol(searchedSymbol);
     // THEN
-    Assertions.assertThat(foundShape).isEqualTo(exptectedShape);
+    Assertions.assertThat(foundShape).isEqualTo(expectedShape);
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @ParameterizedTest
   @CsvSource({
       "ROCK, ROCK, 4",
       "ROCK, PAPER, 1",
       "ROCK, SCISSORS, 7"
   })
-  public void test2(Shape myShape, Shape oponentShape, int expectedScore) {
+  public void calcScoreOfOwnShapeAgainstOpponentBasedOnOwnScoreAndBattleResult(Shape myShape, Shape opponentShape, int expectedScore) {
     // GIVEN args
     // WHEN
-    int score = myShape.scoreAgainst(oponentShape);
+    int score = myShape.scoreAgainst(opponentShape);
     // THEN
     Assertions.assertThat(score).isEqualTo(expectedScore);
   }

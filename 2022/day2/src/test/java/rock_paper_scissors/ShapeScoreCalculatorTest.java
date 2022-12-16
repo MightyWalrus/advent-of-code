@@ -10,17 +10,17 @@ import org.junit.jupiter.api.Test;
 
 class ShapeScoreCalculatorTest {
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test() {
+  public void calculateTotalScoreByUsingShapePairsSummingUpSingleRoundResults() {
     // GIVEN
+    int playerPosition = 1;
     Collection<Pair<Shape, Shape>> shapePairs = List.of(
         new Pair<>(Shape.SCISSORS, Shape.SCISSORS),
         new Pair<>(Shape.PAPER, Shape.SCISSORS),
         new Pair<>(Shape.PAPER, Shape.ROCK));
     // WHEN
-    int totalScore = ShapeScoreCalculator.calcTotalScore(shapePairs);
+    int totalScore = ShapeScoreCalculator.calcTotalScore(shapePairs, playerPosition);
     // THEN
-    Assertions.assertThat(totalScore).isEqualTo(6 + 9 + 1);
+    Assertions.assertThat(totalScore).isEqualTo((3 + 3) + (3 + 6) + (1 + 0));
   }
 }

@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 
 class ShapeInputParserTest {
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test() {
+  public void parseValidShapeInputTextIntoCollectionOfShapePairs() {
     // GIVEN
     String resource = "strategy-input.txt";
     Collection<Pair<Shape, Shape>> expectedShapePairs = List.of(
