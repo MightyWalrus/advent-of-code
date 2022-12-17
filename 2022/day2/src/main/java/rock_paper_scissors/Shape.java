@@ -31,21 +31,25 @@ public enum Shape {
         .orElse(null);
   }
 
+  static Shape fromOutcomeAgainst(String outcome, String symbol) {
+    return fromSymbol(symbol).getOpponentShapeByItsOutcome(outcome);
+  }
+
   int scoreAgainst(Shape shape) {
     return this.points +
         (this == shape ? 3 : this.beatenBy == shape ? 0 : 6);
   }
 
-  Shape getShapeByOutcome(String symbol) {
+  private Shape getOpponentShapeByItsOutcome(String symbol) {
     Shape shape = null;
     switch (symbol) {
-      case "X":
+      case "Z":
         shape = beatenBy;
         break;
       case "Y":
         shape = this;
         break;
-      case "Z":
+      case "X":
         shape = Arrays.stream(Shape.values())
             .filter(s -> s.beatenBy == this)
             .findFirst()
@@ -53,4 +57,5 @@ public enum Shape {
     }
     return shape;
   }
+
 }

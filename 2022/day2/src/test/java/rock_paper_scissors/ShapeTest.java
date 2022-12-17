@@ -22,6 +22,21 @@ class ShapeTest {
 
   @ParameterizedTest
   @CsvSource({
+      "A, X, SCISSORS",
+      "A, Y, ROCK",
+      "A, Z, PAPER"
+  })
+  public void usingKnownSymbolAndOutcomeAgainstReturnsMatchingShape(String shapeSymbol,
+      String outcomeSymbol, Shape expectedShape) {
+    // GIVEN args
+    // WHEN
+    Shape foundShape = Shape.fromOutcomeAgainst(outcomeSymbol, shapeSymbol);
+    // THEN
+    Assertions.assertThat(foundShape).isEqualTo(expectedShape);
+  }
+
+  @ParameterizedTest
+  @CsvSource({
       "ROCK, ROCK, 4",
       "ROCK, PAPER, 1",
       "ROCK, SCISSORS, 7"
@@ -33,21 +48,6 @@ class ShapeTest {
     int score = myShape.scoreAgainst(opponentShape);
     // THEN
     Assertions.assertThat(score).isEqualTo(expectedScore);
-  }
-
-  @ParameterizedTest
-  @CsvSource({
-      "ROCK, X, PAPER",
-      "ROCK, Y, ROCK",
-      "ROCK, Z, SCISSORS"
-  })
-  public void usingGivenShapeAndExpectedOutcomeReturnsCorrespondingFoundShape(Shape shape,
-      String outcomeSymbol, Shape expectedShape) {
-    // GIVEN args
-    // WHEN
-    Shape foundShape = shape.getShapeByOutcome(outcomeSymbol);
-    // THEN
-    Assertions.assertThat(foundShape).isEqualTo(expectedShape);
   }
 
 }
