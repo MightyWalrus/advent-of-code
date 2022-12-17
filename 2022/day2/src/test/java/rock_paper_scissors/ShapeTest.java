@@ -26,12 +26,28 @@ class ShapeTest {
       "ROCK, PAPER, 1",
       "ROCK, SCISSORS, 7"
   })
-  public void calcScoreOfOwnShapeAgainstOpponentBasedOnOwnScoreAndBattleResult(Shape myShape, Shape opponentShape, int expectedScore) {
+  public void calcScoreOfOwnShapeAgainstOpponentBasedOnOwnScoreAndBattleResult(Shape myShape,
+      Shape opponentShape, int expectedScore) {
     // GIVEN args
     // WHEN
     int score = myShape.scoreAgainst(opponentShape);
     // THEN
     Assertions.assertThat(score).isEqualTo(expectedScore);
+  }
+
+  @ParameterizedTest
+  @CsvSource({
+      "ROCK, X, PAPER",
+      "ROCK, Y, ROCK",
+      "ROCK, Z, SCISSORS"
+  })
+  public void usingGivenShapeAndExpectedOutcomeReturnsCorrespondingFoundShape(Shape shape,
+      String outcomeSymbol, Shape expectedShape) {
+    // GIVEN args
+    // WHEN
+    Shape foundShape = shape.getShapeByOutcome(outcomeSymbol);
+    // THEN
+    Assertions.assertThat(foundShape).isEqualTo(expectedShape);
   }
 
 }

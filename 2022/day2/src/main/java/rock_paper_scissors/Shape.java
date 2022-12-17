@@ -35,4 +35,22 @@ public enum Shape {
     return this.points +
         (this == shape ? 3 : this.beatenBy == shape ? 0 : 6);
   }
+
+  Shape getShapeByOutcome(String symbol) {
+    Shape shape = null;
+    switch (symbol) {
+      case "X":
+        shape = beatenBy;
+        break;
+      case "Y":
+        shape = this;
+        break;
+      case "Z":
+        shape = Arrays.stream(Shape.values())
+            .filter(s -> s.beatenBy == this)
+            .findFirst()
+            .orElse(null);
+    }
+    return shape;
+  }
 }
