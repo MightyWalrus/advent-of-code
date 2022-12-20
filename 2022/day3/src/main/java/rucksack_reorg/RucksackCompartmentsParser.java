@@ -33,18 +33,45 @@ public class RucksackCompartmentsParser {
     return rucksackCompartmentsMap;
   }
 
+  static Map<Integer, List<Collection<Character>>> parseGroupInput(String resource,
+      int numberOfGroupMembers) {
+    Map<Integer, List<Collection<Character>>> groupRucksacksMap = new HashMap<>();
+    try (
+        InputStream is = RucksackCompartmentsParser.class.getClassLoader()
+            .getResourceAsStream(resource);
+        InputStreamReader isr = new InputStreamReader(is);
+        BufferedReader br = new BufferedReader(isr)) {
+      String line = br.readLine();
+      int group = 1;
+      Collection<String> groupRucksacks = new ArrayList<>();
+      while (line != null) {
+        groupRucksacks.add(line);
+        if (groupRucksacks.size() >= numberOfGroupMembers) {
+          groupRucksacksMap.put(group++, groupRucksacks.stream()
+              .map(rucksack -> mapStringToCollectionOfCharacters(rucksack))
+              .collect(Collectors.toList()));
+          groupRucksacks.clear();
+        }
+        line = br.readLine();
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return groupRucksacksMap;
+  }
+
   private static List<Collection<Character>> getCompartments(int numberOfCompartments, String line) {
     List<Collection<Character>> compartments = new ArrayList<>();
     int compartmentSize = line.length() / numberOfCompartments;
     for (int beginIndex = 0; beginIndex < line.length(); beginIndex = beginIndex + compartmentSize) {
       compartments.add(
-          parseCompartmentString(line.substring(beginIndex, beginIndex + compartmentSize)));
+          mapStringToCollectionOfCharacters(line.substring(beginIndex, beginIndex + compartmentSize)));
     }
     return compartments;
   }
 
-  private static Collection<Character> parseCompartmentString(String compartment) {
-    return compartment.chars()
+  private static Collection<Character> mapStringToCollectionOfCharacters(String string) {
+    return string.chars()
         .mapToObj(value -> (char) value)
         .collect(Collectors.toList());
   }

@@ -28,4 +28,21 @@ class RucksackCompartmentsParserTest {
         .containsAll(List.of('Z', 'F', 'R'));
   }
 
+  @Test
+  public void parseValidGroupInputIntoMapContainingEachGroupsRucksacks() {
+    // GIVEN
+    String resource = "rucksack-input.txt";
+    int numberOfGroupMembers = 3;
+    // WHEN
+    Map<Integer, List<Collection<Character>>> parsedRucksackCompartments =
+        RucksackCompartmentsParser.parseGroupInput(resource, numberOfGroupMembers);
+    // THEN
+    Assertions.assertThat(parsedRucksackCompartments.size()).isEqualTo(1);
+    Assertions.assertThat(parsedRucksackCompartments.values().stream()
+        .allMatch(list -> list.size() == 3)).isTrue();
+    Assertions.assertThat(parsedRucksackCompartments.get(1).get(0).size()).isEqualTo(18);
+    Assertions.assertThat(parsedRucksackCompartments.get(1).get(0))
+        .containsAll(List.of('G', 'w', 'r'));
+  }
+
 }
