@@ -26,4 +26,11 @@ public class SectionsAnalyzer {
     return count;
   }
 
+  static int getBetterNumberOfFullyContainedSections(Map<Integer, Collection<Section>> parsedSections) {
+    return (int) parsedSections.entrySet().stream()
+        .map(entry -> Section.fullyContainsAny(entry.getValue()))
+        .filter(Boolean::booleanValue)
+        .count();
+  }
+
 }

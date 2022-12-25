@@ -17,8 +17,10 @@ class SectionsAnalyzerTest {
         3, List.of(new Section(85, 86), new Section(64, 86)));
     // WHEN
     int count = SectionsAnalyzer.getNumberOfFullyContainedSections(parsedSections);
+    int betterCount = SectionsAnalyzer.getBetterNumberOfFullyContainedSections(parsedSections);
     // THEN
     Assertions.assertThat(count).isEqualTo(2);
+    Assertions.assertThat(betterCount).isEqualTo(2);
   }
 
 }
