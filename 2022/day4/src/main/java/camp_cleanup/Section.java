@@ -31,9 +31,29 @@ class Section {
     return false;
   }
 
+  static boolean overlapsAny(Collection<Section> sections) {
+    ArrayList<Section> sectionList = new ArrayList<>(sections);
+    for (int i = 0; i < sectionList.size(); i++) {
+      Section section = sectionList.get(i);
+      for (int j = 0; j < sectionList.size(); j++) {
+        if (i != j && section.overlapsWithOther(sectionList.get(j))) {
+          return true;
+        }
+      }
+    }
+    return false;
+
+  }
+
   boolean fullyContainsOther(Section otherSection) {
     return this.min <= otherSection.min
         && this.max >= otherSection.max;
+  }
+
+  boolean overlapsWithOther(Section otherSection) {
+    return this.fullyContainsOther(otherSection)
+        || this.min >= otherSection.min && this.min <= otherSection.max
+        || this.max >= otherSection.min && this.max <= otherSection.max;
   }
 
   @Override

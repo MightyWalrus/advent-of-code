@@ -33,4 +33,11 @@ public class SectionsAnalyzer {
         .count();
   }
 
+  static int getterBetterNumberOfOverlappingSections(Map<Integer, Collection<Section>> parsedSections) {
+    return (int) parsedSections.entrySet().stream()
+        .map(entry -> Section.overlapsAny(entry.getValue()))
+        .filter(Boolean::booleanValue)
+        .count();
+  }
+
 }

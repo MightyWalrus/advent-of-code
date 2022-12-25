@@ -11,5 +11,7 @@ public class App {
         "cleanup-sections.txt");
     System.out.println(String.format("Assignment pairs contain sections fully: %s",
         SectionsAnalyzer.getNumberOfFullyContainedSections(parsedSections)));
+    System.out.println(String.format("Assignment pairs contain sections overlapping: %s",
+        SectionsAnalyzer.getterBetterNumberOfOverlappingSections(parsedSections)));
   }
 }
