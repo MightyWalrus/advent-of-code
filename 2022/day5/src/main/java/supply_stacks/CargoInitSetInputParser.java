@@ -11,7 +11,7 @@ import java.util.Stack;
 
 public class CargoInitSetInputParser {
 
-  static List<Stack<Character>> parseInitCargoSet(String resource) {
+  static List<Stack<Character>> parse(String resource) {
     // input is basically reversed
     Stack<String> stackedInputLines = getLinesOfInputFileOnStack(resource);
     String stackNumberInput = stackedInputLines.pop();

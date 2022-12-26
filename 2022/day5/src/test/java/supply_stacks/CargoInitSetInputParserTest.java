@@ -12,7 +12,7 @@ class CargoInitSetInputParserTest {
     // GIVEN
     String resource = "init-cargo.txt";
     // WHEN
-    List<Stack<Character>> stacks = CargoInitSetInputParser.parseInitCargoSet(resource);
+    List<Stack<Character>> stacks = CargoInitSetInputParser.parse(resource);
     // THEN
     Assertions.assertThat(stacks.size()).isEqualTo(9);
     Assertions.assertThat(stacks.stream()
