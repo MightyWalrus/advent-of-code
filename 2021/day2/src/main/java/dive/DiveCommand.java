@@ -42,19 +42,27 @@ abstract class DiveCommand {
 
   abstract SubmarinePosition apply(SubmarinePosition position);
 
+  abstract SubmarinePosition applyWithAim(SubmarinePosition position);
+
   DiveCommand(int units) {
     this.units = units;
   }
 
   static class Forward extends DiveCommand {
 
+    Forward(int unit) {
+      super(unit);
+    }
+
     @Override
     SubmarinePosition apply(SubmarinePosition position) {
       return new SubmarinePosition(position.horizontal + units, position.vertical);
     }
 
-    Forward(int unit) {
-      super(unit);
+    @Override
+    SubmarinePosition applyWithAim(SubmarinePosition position) {
+      return new SubmarinePosition(position.horizontal + units,
+          position.vertical + position.aim * units, position.aim);
     }
   }
 
@@ -68,6 +76,11 @@ abstract class DiveCommand {
     SubmarinePosition apply(SubmarinePosition position) {
       return new SubmarinePosition(position.horizontal, position.vertical + units);
     }
+
+    @Override
+    SubmarinePosition applyWithAim(SubmarinePosition position) {
+      return new SubmarinePosition(position.horizontal, position.vertical, position.aim + units);
+    }
   }
 
   static class Up extends DiveCommand {
@@ -79,6 +92,11 @@ abstract class DiveCommand {
     @Override
     SubmarinePosition apply(SubmarinePosition position) {
       return new SubmarinePosition(position.horizontal, position.vertical - units);
+    }
+
+    @Override
+    SubmarinePosition applyWithAim(SubmarinePosition position) {
+      return new SubmarinePosition(position.horizontal, position.vertical, position.aim - units);
     }
   }
 

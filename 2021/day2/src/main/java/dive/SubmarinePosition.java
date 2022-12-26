@@ -4,15 +4,20 @@ class SubmarinePosition {
 
   final int horizontal;
   final int vertical;
+  final int aim;
 
   SubmarinePosition() {
-    this.horizontal = 0;
-    this.vertical = 0;
+    this(0, 0, 0);
   }
 
   SubmarinePosition(int horizontal, int vertical) {
+    this(horizontal, vertical, 0);
+  }
+
+  SubmarinePosition(int horizontal, int vertical, int aim) {
     this.horizontal = horizontal;
     this.vertical = vertical;
+    this.aim = aim;
   }
 
   int getScore() {
