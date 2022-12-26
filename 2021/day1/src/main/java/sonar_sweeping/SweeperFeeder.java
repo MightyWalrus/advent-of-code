@@ -1,4 +1,4 @@
-package advent;
+package sonar_sweeping;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

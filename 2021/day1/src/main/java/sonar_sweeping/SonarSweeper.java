@@ -1,4 +1,4 @@
-package advent;
+package sonar_sweeping;
 
 public class SonarSweeper {
 

@@ -16,11 +16,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.javatuples</groupId>
-      <artifactId>javatuples</artifactId>
-      <version>1.2</version>
-    </dependency>
-    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
       <version>5.9.1</version>
@@ -60,7 +55,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>rock_paper_scissors.App</mainClass>
+              <mainClass>camp_cleanup.App</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
