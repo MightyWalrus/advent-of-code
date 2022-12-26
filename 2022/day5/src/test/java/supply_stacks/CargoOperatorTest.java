@@ -47,4 +47,18 @@ class CargoOperatorTest {
     Assertions.assertThat(stackTwo).containsExactly('F', 'G', 'H', 'D', 'C');
     Assertions.assertThat(stackThree).containsExactly('X', 'Y', 'Z', 'B');
   }
+
+  @Test
+  public void operatorMovesMultipleNumberOfCreatesBetweenStacksBasedOnOpsInput() {
+    // GIVEN (init method/ class variables)
+    // WHEN
+    boolean successfulMoves = CargoOperator.moveMultiple(List.of(
+        new MoveOperation(2, 1, 2),
+        new MoveOperation(1, 1, 3)), stacks);
+    // THEN
+    Assertions.assertThat(successfulMoves).isTrue();
+    Assertions.assertThat(stackOne).containsExactly('A');
+    Assertions.assertThat(stackTwo).containsExactly('F', 'G', 'H', 'C', 'D');
+    Assertions.assertThat(stackThree).containsExactly('X', 'Y', 'Z', 'B');
+  }
 }

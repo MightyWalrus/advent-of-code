@@ -30,4 +30,26 @@ public class CargoOperator {
     }
   }
 
+  static boolean moveMultiple(List<MoveOperation> moveOps, List<Stack<Character>> stacks) {
+    return moveOps.stream()
+        .map(moveOp -> moveMultiple(moveOp, stacks))
+        .allMatch(Boolean::booleanValue);
+  }
+
+  private static boolean moveMultiple(MoveOperation moveOp, List<Stack<Character>> stacks) {
+    int numberOfCrates = moveOp.numberOfCrates;
+    Stack<Character> tmpStack = new Stack<>();
+    try {
+      while (numberOfCrates-- > 0) {
+        tmpStack.push(stacks.get(moveOp.from - 1).pop());
+      }
+      while (!tmpStack.isEmpty()) {
+        stacks.get(moveOp.to - 1).push(tmpStack.pop());
+      }
+      return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
 }
