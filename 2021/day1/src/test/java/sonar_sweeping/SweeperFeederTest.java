@@ -7,9 +7,8 @@ import org.junit.jupiter.api.Test;
 
 public class SweeperFeederTest {
 
-    // [UnitOfWork_StateUnderTest_ExpectedBehavior]
     @Test
-    public void test() {
+    public void feedSweeperInputReturnsListOfNumbers() {
         // GIVEN
         String fileName = "day1-input-small.txt";
         SweeperFeeder sweeperFeeder = new SweeperFeeder(fileName);

@@ -5,14 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-public class SonarSweeperTest {
+public class SingleSonarSweeperTest {
 
     @Test
     public void comparingBiggerAgainstSmallerNumberReturnsTrue() {
         // GIVEN
         int number1 = 2;
         int number2 = 4;
-        SonarSweeper ss = new SonarSweeper(number1, number2);
+        SingleSonarSweeper ss = new SingleSonarSweeper(number1, number2);
         // WHEN
         boolean result = ss.sweep();
         // THEN
@@ -24,7 +24,7 @@ public class SonarSweeperTest {
         // GIVEN
         int number1 = 4;
         int number2 = 2;
-        SonarSweeper ss = new SonarSweeper(number1, number2);
+        SingleSonarSweeper ss = new SingleSonarSweeper(number1, number2);
         // WHEN
         boolean result = ss.sweep();
         // THEN
@@ -36,7 +36,7 @@ public class SonarSweeperTest {
         // GIVEN
         int number1 = 4;
         int number2 = 4;
-        SonarSweeper ss = new SonarSweeper(number1, number2);
+        SingleSonarSweeper ss = new SingleSonarSweeper(number1, number2);
         // WHEN
         boolean result = ss.sweep();
         // THEN
