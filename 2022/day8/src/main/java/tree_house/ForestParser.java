@@ -43,12 +43,4 @@ public class ForestParser {
     return new Forest(trees);
   }
 
-  private static int[] getTreeRow(String line) {
-    int[] treeRow = new int[line.length()];
-    for (int i = 0; i < line.length(); i++) {
-      treeRow[i] = Integer.valueOf(line.charAt(i));
-    }
-    return treeRow;
-  }
-
 }

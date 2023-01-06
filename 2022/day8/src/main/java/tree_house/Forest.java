@@ -16,8 +16,8 @@ public class Forest {
     int count = 0;
     for (int y = 1; y < trees.length - 1; y++) {
       for (int x = 1; x < trees[y].length - 1; x++) {
-        if (!isHiddenByUpper(y, x) || !isHiddenByRighter(y, x)
-            || !isHiddenByDowner(y, x) || !isHiddenByLefter(y, x)) {
+        if (!isHiddenByNorthernTrees(y, x) || !isHiddenByEasternTrees(y, x)
+            || !isHiddenBySouthernTrees(y, x) || !isHiddenByWesternTrees(y, x)) {
           count++;
           continue;
         }
@@ -26,7 +26,7 @@ public class Forest {
     return count;
   }
 
-  boolean isHiddenByUpper(int startY, int x) {
+  boolean isHiddenByNorthernTrees(int startY, int x) {
     for (int y = startY - 1; y >= 0; y--) {
       if (trees[y][x] >= trees[startY][x]) {
         return true;
@@ -35,7 +35,7 @@ public class Forest {
     return false;
   }
 
-  boolean isHiddenByDowner(int startY, int x) {
+  boolean isHiddenBySouthernTrees(int startY, int x) {
     for (int y = startY + 1; y < trees.length; y++) {
       if (trees[y][x] >= trees[startY][x]) {
         return true;
@@ -44,7 +44,7 @@ public class Forest {
     return false;
   }
 
-  boolean isHiddenByRighter(int y, int startX) {
+  boolean isHiddenByEasternTrees(int y, int startX) {
     for (int x = startX + 1; x < trees[y].length; x++) {
       if (trees[y][x] >= trees[y][startX]) {
         return true;
@@ -53,7 +53,7 @@ public class Forest {
     return false;
   }
 
-  boolean isHiddenByLefter(int y, int startX) {
+  boolean isHiddenByWesternTrees(int y, int startX) {
     for (int x = startX - 1; x >= 0; x--) {
       if (trees[y][x] >= trees[y][startX]) {
         return true;

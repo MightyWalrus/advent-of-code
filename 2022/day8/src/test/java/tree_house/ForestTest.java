@@ -14,9 +14,8 @@ class ForestTest {
     forest = new Forest(trees);
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test() {
+  public void getEdgeTreesFromForestReturnsCorrectAmount() {
     // GIVEN (field)
     // WHEN
     int edgeTrees = forest.getEdgeTrees();
@@ -24,9 +23,8 @@ class ForestTest {
     Assertions.assertThat(edgeTrees).isEqualTo(5 + 5 + (2 * 2));
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test2() {
+  public void getVisibleInnerTreesFromForestReturnsTreeAmountVisibleFromAnySide() {
     // GIVEN (field)
     // WHEN
     int visibleInnerTrees = forest.getVisibleInnerTrees();
@@ -34,42 +32,38 @@ class ForestTest {
     Assertions.assertThat(visibleInnerTrees).isEqualTo(4);
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test3() {
+  public void isHiddenByNorthernTreesShowsIfTheCheckedTreeIsHiddenFromThatSide() {
     // GIVEN (field)
     // WHEN
-    boolean hiddenByUpper = forest.isHiddenByUpper(1, 1);
+    boolean hiddenByUpper = forest.isHiddenByNorthernTrees(1, 1);
     // THEN
     Assertions.assertThat(hiddenByUpper).isFalse();
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test4() {
+  public void isHiddenBySouthernTreesShowsIfTheCheckedTreeIsHiddenFromThatSide() {
     // GIVEN (field)
     // WHEN
-    boolean hiddenByUpper = forest.isHiddenByDowner(1, 1);
+    boolean hiddenByUpper = forest.isHiddenBySouthernTrees(1, 1);
     // THEN
     Assertions.assertThat(hiddenByUpper).isTrue();
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test5() {
+  public void isHiddenByEasternTreesShowsIfTheCheckedTreeIsHiddenFromThatSide() {
     // GIVEN (field)
     // WHEN
-    boolean hiddenByUpper = forest.isHiddenByRighter(1, 1);
+    boolean hiddenByUpper = forest.isHiddenByEasternTrees(1, 1);
     // THEN
     Assertions.assertThat(hiddenByUpper).isTrue();
   }
 
-  // [UnitOfWork_StateUnderTest_ExpectedBehavior]
   @Test
-  public void test6() {
+  public void isHiddenByWesternTreesShowsIfTheCheckedTreeIsHiddenFromThatSide() {
     // GIVEN (field)
     // WHEN
-    boolean hiddenByUpper = forest.isHiddenByLefter(1, 1);
+    boolean hiddenByUpper = forest.isHiddenByWesternTrees(1, 1);
     // THEN
     Assertions.assertThat(hiddenByUpper).isFalse();
   }
