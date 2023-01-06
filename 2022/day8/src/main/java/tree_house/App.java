@@ -6,5 +6,6 @@ public class App {
     System.out.println("\n--- Advent of Code 2022 - Day 8: Treetop Tree House ---\n");
     Forest forest = ForestParser.parse("forest.txt");
     System.out.println(String.format("All visible trees: %s", forest.getAllVisibleTrees()));
+    System.out.println(String.format("Highest scenic score of any tree: %s", forest.getMaxScenicScore()));
   }
 }

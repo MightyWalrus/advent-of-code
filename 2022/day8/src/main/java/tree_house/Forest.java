@@ -1,11 +1,32 @@
 package tree_house;
 
+import java.util.Arrays;
+
 public class Forest {
 
   final int[][] trees;
 
   public Forest(int[][] trees) {
     this.trees = trees;
+  }
+
+  public int getAllVisibleTrees() {
+    return getEdgeTrees() + getVisibleInnerTrees();
+  }
+
+  public int getMaxScenicScore() {
+    int maxScore = 0;
+    for (int y = 1; y < trees.length - 1; y++) {
+      for (int x = 1; x < trees[y].length - 1; x++) {
+        int total = TreeCheckResult.totalScenicScore(
+            checkNorthernTrees(y, x),
+            checkEasternTrees(y, x),
+            checkSouthernTrees(y, x),
+            checkWesternTrees(y, x));
+        maxScore = total > maxScore ? total : maxScore;
+      }
+    }
+    return maxScore;
   }
 
   int getEdgeTrees() {
@@ -16,54 +37,70 @@ public class Forest {
     int count = 0;
     for (int y = 1; y < trees.length - 1; y++) {
       for (int x = 1; x < trees[y].length - 1; x++) {
-        if (!isHiddenByNorthernTrees(y, x) || !isHiddenByEasternTrees(y, x)
-            || !isHiddenBySouthernTrees(y, x) || !isHiddenByWesternTrees(y, x)) {
+        if (!checkNorthernTrees(y, x).hidden || !checkEasternTrees(y, x).hidden
+            || !checkSouthernTrees(y, x).hidden || !checkWesternTrees(y, x).hidden) {
           count++;
-          continue;
         }
       }
     }
     return count;
   }
 
-  boolean isHiddenByNorthernTrees(int startY, int x) {
+  TreeCheckResult checkNorthernTrees(int startY, int x) {
     for (int y = startY - 1; y >= 0; y--) {
       if (trees[y][x] >= trees[startY][x]) {
-        return true;
+        return new TreeCheckResult(true, startY - y);
       }
     }
-    return false;
+    return new TreeCheckResult(false, startY);
   }
 
-  boolean isHiddenBySouthernTrees(int startY, int x) {
+  TreeCheckResult checkSouthernTrees(int startY, int x) {
     for (int y = startY + 1; y < trees.length; y++) {
       if (trees[y][x] >= trees[startY][x]) {
-        return true;
+        return new TreeCheckResult(true, y - startY);
       }
     }
-    return false;
+    return new TreeCheckResult(false, (trees.length - 1) - startY);
   }
 
-  boolean isHiddenByEasternTrees(int y, int startX) {
+  TreeCheckResult checkEasternTrees(int y, int startX) {
     for (int x = startX + 1; x < trees[y].length; x++) {
       if (trees[y][x] >= trees[y][startX]) {
-        return true;
+        return new TreeCheckResult(true, x - startX);
       }
     }
-    return false;
+    return new TreeCheckResult(false, (trees[y].length - 1) - startX);
   }
 
-  boolean isHiddenByWesternTrees(int y, int startX) {
+  TreeCheckResult checkWesternTrees(int y, int startX) {
     for (int x = startX - 1; x >= 0; x--) {
       if (trees[y][x] >= trees[y][startX]) {
-        return true;
+        return new TreeCheckResult(true, startX - x);
       }
     }
-    return false;
+    return new TreeCheckResult(false, startX);
   }
 
-  int getAllVisibleTrees() {
-    return getEdgeTrees() + getVisibleInnerTrees();
+}
+
+class TreeCheckResult {
+
+  boolean hidden;
+  int scenicScore;
+
+  public TreeCheckResult() {
+    this(false, 0);
   }
 
+  TreeCheckResult(boolean hidden, int scenicScore) {
+    this.hidden = hidden;
+    this.scenicScore = scenicScore;
+  }
+
+  static int totalScenicScore(TreeCheckResult... results) {
+    return Arrays.stream(results)
+        .map(result -> result.scenicScore)
+        .reduce(1, (a, b) -> a * b);
+  }
 }
